@@ -45,17 +45,24 @@ body {
   background: #0088cc;
 }
 
-/* Tab content centered */
 .tabcontent {
   display: none;
-  max-width: 800px;      /* keeps content from stretching too wide */
-  width: 90%;            /* responsive */
+  max-width: 90%;    /* shrink on smaller screens */
+  width: 100%;
   background: white;
-  padding: 40px;
-  margin-top: 100px;     /* leaves space for floating bar */
+  padding: 20px;
+  margin-top: 100px; /* space for top bar */
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  text-align: center;    /* center text inside */
+  text-align: center;
+}
+
+/* Adjust margin-top for smaller screens */
+@media screen and (max-width: 600px) {
+  .tabcontent {
+    margin-top: 120px; /* give more space if bar wraps */
+    padding: 15px;
+  }
 }
 
 /* Projects Grid */
