@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Carson Hedrich Portfolio</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <nav class="tabs">
+            <button class="tablink active" onclick="openTab(event, 'home')">Home</button>
+            <button class="tablink" onclick="openTab(event, 'projects')">Projects</button>
+            <button class="tablink" onclick="openTab(event, 'resume')">Resume</button>
+        </nav>
+
+        <section id="home" class="tabcontent" style="display: block;">
+            <h2>About Me</h2>
+            <p>Short Bio</p>
+        </section>
+
+        <section id="resume" class="tabcontent">
+            <h2>My Resume</h2>
+            <p><a href="resume.pdf" target="_blank">Click here to view my resume</a></p>
+        </section>
+
+
+        <section id="projects" class="tabcontent">
+            <h2>Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="project1.jpg" alt="Project 1">
+                    <p>Project 1 - A short description goes here.</p>
+                </div>
+
+                <div class="project-card">
+                    <img src="project2.jpg" alt="Project 2">
+                    <p>Project 2 - A short description goes here.</p>
+                </div>
+
+                <div class="project-card">
+                    <img src="project3.jpg" alt="Project 3">
+                    <p>Project 3 - A short description goes here.</p>
+                </div>
+            </div>
+        </section>
+
+        <script src="script.js"></script>
+    </body>
+</html>
