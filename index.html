@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Carson Hedrich Portfolio</title>
         <link rel="stylesheet" href="style.css">
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
     </head>
     <body>
         <nav class="tabs">
@@ -15,7 +16,19 @@
 
         <section id="home" class="tabcontent" style="display: block;">
             <h2>About Me</h2>
-            <p>Short Bio</p>
+            <div class="bio-content">
+                <hr>
+                <p>Hi! I'm Carson Hedrich.</p>
+                <p>I am graduating with a B.S. in Computer Science in December 2025, with a concentration in Cybersecurity and Privacy.</p>
+                <p>I have a passion for cybersecurity, especially reverse engineering malware and ethical pen-testing. I enjoy solving logic-based puzzles, and I find that cybersecurity has a lot of them! 
+                    Whether its analyzing malware or insecure systems, I enjoy the challenges presented, and the logical methods to overcoming them (in ethical scenarios!)</p>
+                <p>I've recently started practicing using TryHackMe to practice pentesting, and I've learned a lot in just a short time about many of the tools, exploits, and general vulnerabilities which are used in practical scenarios. 
+                    I can't wait to learn more!</p>
+                <hr>
+                <p>My personal interests include video games, reading science fiction, and watching anime.</p>
+                <hr>
+                <p></p>
+            </div>
         </section>
 
 
@@ -23,18 +36,40 @@
             <h2>Projects</h2>
             <div class="projects-grid">
                 <div class="project-card">
-                    <img src="project1.jpg" alt="Project 1">
-                    <p>Project 1 - A short description goes here.</p>
+                    <p class="project-title"><strong>Malware Reverse Engineering</strong></p>
+
+                    <div class="project-images">
+
+                    </div>
+
+                    <div class="project-description">
+                        <p>Analyzed malware samples targeting MS-DOS and 32-bit Windows.</p>
+                        <p>Used static and dynamic analysis to determine behavior and infection methods.</p>
+                        <p>Malware analyzed: Michelangelo, Dos7, SQLSlammer, Lucius, Harulf</p>
+                        <p>Tools: IDA Pro, Ollydbg</p>
+
+                        
+                    </div>
                 </div>
 
                 <div class="project-card">
-                    <img src="project2.jpg" alt="Project 2">
-                    <p>Project 2 - A short description goes here.</p>
-                </div>
+                    <p class="project-title"><strong>Digital Forensics Investigation Exercise</strong></p>
 
-                <div class="project-card">
-                    <img src="project3.jpg" alt="Project 3">
-                    <p>Project 3 - A short description goes here.</p>
+                    <div class="project-images">
+                        <img src="resources/autopsy.PNG" alt="Autopsy program logo">
+                        <img src="resources/live_analysis.PNG" alt="Suspect's Desktop after brute-forcing their password">
+                        <p>Suspect's desktop. Their desktop could be accessed after discovering their password in the forensic disk image.</p>
+                    </div>
+
+                    <div class="project-description">
+                        <p>Conducted a full investigation in a simulated suspect scenario. Analyzed a forensic disk image using Autopsy and performed live analysis on a disk image to uncover evidence, reconstruct events, and create a report to judge if the suspect was innocent or guilty.</p>
+                        <p>This project was ran similar to a capture-the-flag scenario, where tokens were found in important locations. For example, in files where suspicious information could be found, or on websites visited by the suspect relating to their "illegal" activities.</p>
+                        <a class="project-link" href="resources/Forensics Project Report.pdf" target="_blank">View Report</a>
+                        <p>Tools: Autopsy, Ghidra, John the Ripper, steghide</p>
+                        <p>This project was run using Docker and Oracle VirtualBox</p>
+
+                        <p>Note: Any sites mentioned in the report were ran by the teaching staff only for the purpose of this project.</p>
+                    </div>
                 </div>
             </div>
         </section>

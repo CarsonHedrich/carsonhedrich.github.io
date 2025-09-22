@@ -1,7 +1,7 @@
 function openTab(evt, tabName) {
   if (tabName === "resume") {
     // Open resume.pdf in a new tab
-    window.open("resume.pdf", "_blank");
+    window.open("resources/resume.pdf", "_blank");
     return;
   }
 
