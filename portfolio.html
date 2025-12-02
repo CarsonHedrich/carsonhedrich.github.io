@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="portfolio_style.css">
+</head>
+
+<body>
+    <div class="page">
+        <div class="tab-container">
+            <div class="tab active" onclick="switchMainTab('self')">Self-Assessment</div>
+            <div class="tab" onclick="switchMainTab('coursework')">Coursework Portfolio</div>
+        </div>
+
+        <div id="self" class="content" style="display:block;">
+            <h2>Self-Assessment</h2>
+            <p>Write your self-assessment here.</p>
+        </div>
+
+        <div id="coursework" class="content" style="display:none;">
+            <h2>Coursework Portfolio</h2>
+            <div class="subtabs">
+                <div class="subtab active" onclick="switchProject('p1')">Major Project 1</div>
+                <div class="subtab" onclick="switchProject('p2')">Major Project 2</div>
+                <div class="subtab" onclick="switchProject('p3')">Major Project 3</div>
+            </div>
+
+            <div id="p1" class="content"">
+                <h3>Major Project 1</h3>
+                <p>Details about Project 1.</p>
+                <div class="pdf-container">
+                    <div class="pdf-box">
+                        <h4>Resume Before This Course</h4>
+                        <iframe src="resources/old_resume.pdf"></iframe>
+                    </div>
+                    <div class="pdf-box">
+                        <h4>Resume After MP1 and Peer Feedback</h4>
+                        <iframe src="resources/resume.pdf"></iframe>
+                    </div>
+                </div>
+            </div>
+            <div id="p2" class="content" style="display:none;">
+                <h3>Major Project 2</h3>
+                <p>Details about Project 2.</p>
+            </div>
+            <div id="p3" class="content" style="display:none;">
+                <h3>Major Project 3</h3>
+                <p>Details about Project 3.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchMainTab(tab) {
+            document.getElementById('self').style.display = tab === 'self' ? 'block' : 'none';
+            document.getElementById('coursework').style.display = tab === 'coursework' ? 'block' : 'none';
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            if (tab === 'self') document.querySelectorAll('.tab')[0].classList.add('active');
+            else document.querySelectorAll('.tab')[1].classList.add('active');
+        }
+
+        function switchProject(p) {
+            document.querySelectorAll('#coursework > .content').forEach(c => c.style.display = 'none');
+            document.getElementById(p).style.display = 'block';
+            document.querySelectorAll('.subtab').forEach(s => s.classList.remove('active'));
+            if (p === 'p1') document.querySelectorAll('.subtab')[0].classList.add('active');
+            if (p === 'p2') document.querySelectorAll('.subtab')[1].classList.add('active');
+            if (p === 'p3') document.querySelectorAll('.subtab')[2].classList.add('active');
+        }
+    </script>
+</body>
+
+</html>
