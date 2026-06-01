@@ -1,79 +1,1105 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Carson Hedrich Portfolio</title>
-        <link rel="stylesheet" href="style.css">
-        <link rel="icon" type="image/x-icon" href="favicon.ico">
-    </head>
-    <body>
-        <nav class="tabs">
-            <button class="tablink active" onclick="openTab(event, 'home')">Home</button>
-            <button class="tablink" onclick="openTab(event, 'projects')">Projects</button>
-            <button class="tablink" onclick="openTab(event, 'resume')">Resume</button>
-        </nav>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carson Hedrich - Cybersecurity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        <section id="home" class="tabcontent" style="display: block;">
-            <h2>About Me</h2>
-            <div class="bio-content">
-                <hr>
-                <p>Hi! I'm Carson Hedrich.</p>
-                <p>I graduated with a B.S. in Computer Science in December 2025, with a concentration in Cybersecurity and Privacy.</p>
-                <p>I have a passion for cybersecurity, especially reverse engineering malware and ethical pen-testing. I enjoy solving logic-based puzzles, and I find that cybersecurity has a lot of them! 
-                    Whether its analyzing malware or insecure systems, I enjoy the challenges presented, and the logical methods to overcoming them (in ethical scenarios!)</p>
-                <p>I've recently started practicing using TryHackMe to practice pentesting, and I've learned a lot in just a short time about many of the tools, exploits, and general vulnerabilities which are used in practical scenarios. 
-                    I can't wait to learn more!</p>
-                <hr>
-                <p>My personal interests include video games, reading science fiction, and watching anime.</p>
-                <hr>
-                <p></p>
-            </div>
-        </section>
+  :root {
+    --bg: #0a0c0f;
+    --bg2: #111418;
+    --bg3: #181c22;
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(255,255,255,0.15);
+    --text: #e8eaed;
+    --muted: #6b7280;
+    --accent: #00d4aa;
+    --accent2: #0ea5e9;
+    --accent-dim: rgba(0,212,170,0.1);
+    --accent2-dim: rgba(14,165,233,0.1);
+    --red: #f87171;
+    --yellow: #fbbf24;
+    --font-mono: 'IBM Plex Mono', monospace;
+    --font-sans: 'Syne', sans-serif;
+  }
 
+  html { scroll-behavior: smooth; }
 
-        <section id="projects" class="tabcontent">
-            <h2>Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <p class="project-title"><strong>Malware Reverse Engineering</strong></p>
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
 
-                    <div class="project-images">
+  /* Grid texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,212,170,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,170,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
 
-                    </div>
+  /* Nav */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(10,12,15,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
 
-                    <div class="project-description">
-                        <p>Analyzed malware samples targeting MS-DOS and 32-bit Windows.</p>
-                        <p>Used static and dynamic analysis to determine behavior and infection methods.</p>
-                        <p>Malware analyzed: Michelangelo, Dos7, SQLSlammer, Lucius, Harulf</p>
-                        <p>Tools: IDA Pro, Ollydbg</p>
+  .nav-logo {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+  }
 
-                        
-                    </div>
-                </div>
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
 
-                <div class="project-card">
-                    <p class="project-title"><strong>Digital Forensics Investigation Exercise</strong></p>
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
 
-                    <div class="project-images">
-                        <img src="resources/autopsy.PNG" alt="Autopsy program logo">
-                        <img src="resources/live_analysis.PNG" alt="Suspect's Desktop after brute-forcing their password">
-                        <p>Suspect's desktop. Their desktop could be accessed after discovering their password in the forensic disk image.</p>
-                    </div>
+  .nav-links a:hover { color: var(--accent); }
 
-                    <div class="project-description">
-                        <p>Conducted a full investigation in a simulated suspect scenario. Analyzed a forensic disk image using Autopsy and performed live analysis on a disk image to uncover evidence, reconstruct events, and create a report to judge if the suspect was innocent or guilty.</p>
-                        <p>This project was ran similar to a capture-the-flag scenario, where tokens were found in important locations. For example, in files where suspicious information could be found, or on websites visited by the suspect relating to their "illegal" activities.</p>
-                        <a class="project-link" href="resources/Forensics Project Report.pdf" target="_blank">View Report</a>
-                        <p>Tools: Autopsy, Ghidra, John the Ripper, steghide</p>
-                        <p>This project was run using Docker and Oracle VirtualBox</p>
+  /* Hero */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 3rem;
+    z-index: 1;
+  }
 
-                        <p>Note: Any sites mentioned in the report were ran by the teaching staff only for the purpose of this project.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+  .hero-inner {
+    max-width: 900px;
+  }
 
-        <script src="script.js"></script>
-    </body>
+  .hero-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-label::before {
+    content: '';
+    display: inline-block;
+    width: 2rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+
+  h1 span {
+    color: var(--accent);
+  }
+
+  .hero-desc {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 560px;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 3rem;
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--border-hover);
+    color: var(--muted);
+    border-radius: 2px;
+  }
+
+  .tag.accent {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-dim);
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.85rem 1.75rem;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #000;
+    font-weight: 600;
+  }
+
+  .btn-primary:hover {
+    background: #00ffcc;
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    border: 1px solid var(--border-hover);
+    color: var(--text);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-1px);
+  }
+
+  /* Scrolling ticker */
+  .ticker-wrap {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    padding: 0.85rem 0;
+    background: var(--bg2);
+    position: relative;
+    z-index: 1;
+  }
+
+  .ticker {
+    display: flex;
+    gap: 3rem;
+    width: max-content;
+    animation: ticker 30s linear infinite;
+  }
+
+  .ticker-item {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .ticker-item::before {
+    content: '▸';
+    color: var(--accent);
+    font-size: 10px;
+  }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* Sections */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 6rem 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 1.5rem;
+    height: 1px;
+    background: var(--accent);
+    display: inline-block;
+  }
+
+  h2 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 3rem;
+    line-height: 1.15;
+  }
+
+  /* Skills grid */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .skill-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .skill-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .skill-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--accent-dim);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  .skill-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .skill-tools {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .skill-tools span {
+    display: inline-block;
+    margin-right: 0.35rem;
+    color: var(--accent);
+  }
+
+  /* Projects */
+  .projects-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem;
+    transition: border-color 0.2s;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .project-card:hover {
+    border-color: var(--border-hover);
+  }
+
+  .project-card.featured {
+    border-left: 3px solid var(--accent);
+  }
+
+  .project-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.1em;
+  }
+
+  .project-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+
+  .project-desc {
+    color: var(--muted);
+    font-size: 0.92rem;
+    line-height: 1.8;
+    margin-bottom: 1.25rem;
+  }
+
+  .project-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tool-pill {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 0.2rem 0.6rem;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    border-radius: 2px;
+    letter-spacing: 0.04em;
+  }
+
+  .project-link {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--accent);
+    border-radius: 2px;
+    transition: background 0.2s;
+  }
+
+  .project-link:hover {
+    background: var(--accent-dim);
+  }
+
+  /* Training */
+  .training-bar {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.75rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .training-stat {
+    text-align: center;
+  }
+
+  .training-stat-num {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    font-family: var(--font-mono);
+  }
+
+  .training-stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 0.25rem;
+    font-family: var(--font-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .training-divider {
+    width: 1px;
+    height: 48px;
+    background: var(--border);
+  }
+
+  .training-text h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .training-text p {
+    font-size: 0.87rem;
+    color: var(--muted);
+  }
+
+  /* Experience */
+  .experience-item {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .experience-item:last-child { border-bottom: none; }
+
+  .exp-date {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    padding-top: 0.2rem;
+  }
+
+  .exp-company {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.25rem;
+  }
+
+  .exp-role {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .exp-bullets {
+    list-style: none;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.9;
+  }
+
+  .exp-bullets li {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .exp-bullets li::before {
+    content: '▸';
+    color: var(--accent);
+    font-size: 10px;
+    margin-top: 0.45rem;
+    flex-shrink: 0;
+  }
+
+  /* Contact */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .contact-link {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.2s;
+  }
+
+  .contact-link:hover {
+    border-color: var(--accent);
+    background: var(--accent-dim);
+    transform: translateY(-1px);
+  }
+
+  .contact-icon {
+    font-size: 1.4rem;
+    width: 44px;
+    height: 44px;
+    background: var(--bg3);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .contact-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.15rem;
+  }
+
+  .contact-value {
+    font-size: 0.9rem;
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* Footer */
+  footer {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--border);
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer p {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-inner > * {
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-inner > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-inner > *:nth-child(2) { animation-delay: 0.2s; }
+  .hero-inner > *:nth-child(3) { animation-delay: 0.3s; }
+  .hero-inner > *:nth-child(4) { animation-delay: 0.4s; }
+  .hero-inner > *:nth-child(5) { animation-delay: 0.5s; }
+
+  /* Cursor blink */
+  .cursor {
+    display: inline-block;
+    width: 3px;
+    height: 0.85em;
+    background: var(--accent);
+    margin-left: 4px;
+    vertical-align: middle;
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  /* Writeups */
+  .writeups-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .writeup-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .writeup-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+
+  .writeup-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+  }
+
+  .writeup-card:hover::before { transform: scaleX(1); }
+
+  .writeup-card.placeholder {
+    border-style: dashed;
+    opacity: 0.45;
+    pointer-events: none;
+  }
+
+  .writeup-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .writeup-difficulty {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    text-transform: uppercase;
+  }
+
+  .diff-easy { background: rgba(0,212,170,0.12); color: var(--accent); }
+  .diff-medium { background: rgba(251,191,36,0.12); color: var(--yellow); }
+  .diff-hard { background: rgba(248,113,113,0.12); color: var(--red); }
+
+  .writeup-date {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted);
+  }
+
+  .writeup-title {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+
+  .writeup-summary {
+    font-size: 0.87rem;
+    color: var(--muted);
+    line-height: 1.7;
+    flex: 1;
+  }
+
+  .writeup-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .writeup-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 0.15rem 0.5rem;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    border-radius: 2px;
+  }
+
+  .writeup-cta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    margin-top: 0.25rem;
+  }
+
+  .writeup-coming-soon {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: var(--bg2);
+    border: 1px dashed var(--border);
+    border-radius: 4px;
+    grid-column: 1 / -1;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    section { padding: 4rem 1.5rem; }
+    .hero { padding: 0 1.5rem; }
+    .experience-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .project-card { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">ch@portfolio:~$</a>
+  <ul class="nav-links">
+    <li><a href="#about">about</a></li>
+    <li><a href="#skills">skills</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#experience">experience</a></li>
+    <li><a href="#writeups">writeups</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <p class="hero-label">Georgia Tech CS &amp; Cybersecurity</p>
+    <h1>Carson<br>Hedrich<span class="cursor"></span></h1>
+    <p class="hero-desc">
+      Cybersecurity graduate specializing in malware reverse engineering, penetration testing, and digital forensics. I find the logic puzzles in broken systems and I fix them.
+    </p>
+    <div class="hero-tags">
+      <span class="tag accent">Malware Analysis</span>
+      <span class="tag accent">Penetration Testing</span>
+      <span class="tag accent">Digital Forensics</span>
+      <span class="tag">GPA: 3.87</span>
+      <span class="tag">Top 25% - TryHackMe</span>
+      <span class="tag">Google STEP Alum</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View Projects ↓</a>
+      <a href="resources/CarsonHedrich_Resume.pdf" class="btn btn-secondary" target="_blank">Resume ↗</a>
+    </div>
+  </div>
+</div>
+
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="ticker-item">IDA Pro</span>
+    <span class="ticker-item">Ghidra</span>
+    <span class="ticker-item">OllyDbg</span>
+    <span class="ticker-item">Metasploit</span>
+    <span class="ticker-item">Nmap</span>
+    <span class="ticker-item">Splunk SIEM</span>
+    <span class="ticker-item">Autopsy</span>
+    <span class="ticker-item">Hydra</span>
+    <span class="ticker-item">Gobuster</span>
+    <span class="ticker-item">Wireshark</span>
+    <span class="ticker-item">Python</span>
+    <span class="ticker-item">Assembly</span>
+    <span class="ticker-item">Privilege Escalation</span>
+    <span class="ticker-item">SQL Injection</span>
+    <span class="ticker-item">Reverse Shells</span>
+    <!-- duplicate for seamless loop -->
+    <span class="ticker-item">IDA Pro</span>
+    <span class="ticker-item">Ghidra</span>
+    <span class="ticker-item">OllyDbg</span>
+    <span class="ticker-item">Metasploit</span>
+    <span class="ticker-item">Nmap</span>
+    <span class="ticker-item">Splunk SIEM</span>
+    <span class="ticker-item">Autopsy</span>
+    <span class="ticker-item">Hydra</span>
+    <span class="ticker-item">Gobuster</span>
+    <span class="ticker-item">Wireshark</span>
+    <span class="ticker-item">Python</span>
+    <span class="ticker-item">Assembly</span>
+    <span class="ticker-item">Privilege Escalation</span>
+    <span class="ticker-item">SQL Injection</span>
+    <span class="ticker-item">Reverse Shells</span>
+  </div>
+</div>
+
+<!-- About -->
+<section id="about">
+  <p class="section-label">About</p>
+  <h2>The person behind<br>the terminal</h2>
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;">
+    <div>
+      <p style="color:var(--muted); line-height:1.9; margin-bottom:1.25rem;">
+        I'm a cybersecurity graduate from Georgia Tech with a deep interest in how systems break and what that reveals about how they were built. My work centers on malware reverse engineering, offensive security, and forensic investigation.
+      </p>
+      <p style="color:var(--muted); line-height:1.9; margin-bottom:1.25rem;">
+        Before focusing on security, I interned at Google, where I built production-grade software used by millions of advertisers. That experience gave me a software engineer's perspective on how systems are constructed, which makes me better at pulling them apart.
+      </p>
+      <p style="color:var(--muted); line-height:1.9;">
+        Outside of security: science fiction, video games, anime, and the occasional CTF.
+      </p>
+    </div>
+    <div>
+      <div style="background:var(--bg2); border:1px solid var(--border); border-radius:4px; padding:1.5rem; font-family:var(--font-mono); font-size:13px;">
+        <p style="color:var(--accent); margin-bottom:1rem;">$ whoami --details</p>
+        <p style="color:var(--muted); margin-bottom:0.4rem;"><span style="color:var(--text);">school</span>    Georgia Institute of Technology</p>
+        <p style="color:var(--muted); margin-bottom:0.4rem;"><span style="color:var(--text);">degree</span>    B.S. Computer Science</p>
+        <p style="color:var(--muted); margin-bottom:0.4rem;"><span style="color:var(--text);">focus</span>     Cybersecurity &amp; Privacy</p>
+        <p style="color:var(--muted); margin-bottom:0.4rem;"><span style="color:var(--text);">gpa</span>       3.87</p>
+        <p style="color:var(--muted); margin-bottom:0.4rem;"><span style="color:var(--text);">graduated</span> December 2025</p>
+        <p style="color:var(--muted); margin-bottom:1rem;"><span style="color:var(--text);">status</span>    seeking full-time roles</p>
+        <p style="color:var(--accent);">$ _</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section id="skills">
+  <p class="section-label">Skills</p>
+  <h2>Tools &amp; capabilities</h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-card-header">
+        <div class="skill-icon">🔬</div>
+        <span class="skill-title">Malware Analysis</span>
+      </div>
+      <div class="skill-tools">
+        Static &amp; dynamic analysis, sandbox unpacking,<br>binary extraction, assembly-level RE<br><br>
+        <span>IDA Pro</span> <span>Ghidra</span> <span>OllyDbg</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-header">
+        <div class="skill-icon">⚔️</div>
+        <span class="skill-title">Penetration Testing</span>
+      </div>
+      <div class="skill-tools">
+        SSRF, CSRF, XSS, SQL injection,<br>reverse shells, privilege escalation<br><br>
+        <span>Nmap</span> <span>Metasploit</span> <span>ffuf</span> <span>Gobuster</span> <span>Hydra</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-header">
+        <div class="skill-icon">🛡️</div>
+        <span class="skill-title">Digital Forensics &amp; Defense</span>
+      </div>
+      <div class="skill-tools">
+        Evidence collection, log analysis,<br>alert triage, network packet analysis<br><br>
+        <span>Autopsy</span> <span>Splunk</span> <span>Wireshark</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-header">
+        <div class="skill-icon">💻</div>
+        <span class="skill-title">Languages &amp; Platforms</span>
+      </div>
+      <div class="skill-tools">
+        Systems, scripting, and web<br><br>
+        <span>Python</span> <span>C</span> <span>C++</span> <span>Java</span> <span>Assembly</span><br>
+        <span>JavaScript</span> <span>Linux</span> <span>Windows</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="projects">
+  <p class="section-label">Projects</p>
+  <h2>Selected work</h2>
+  <div class="projects-grid">
+
+    <div class="project-card featured">
+      <div>
+        <p class="project-num">01 / MALWARE RE</p>
+        <h3 class="project-title">Harulf Virus - Reverse Engineering Analysis</h3>
+        <p class="project-desc">
+          Performed static and dynamic analysis on a packed, polymorphic Windows PE virus to determine its infection mechanism and payload behavior. Applied OllyDbg sandboxing to safely unpack the virus and extract the unencrypted binary, then conducted assembly-level analysis in IDA Pro. Identified and documented the virus's polymorphic evasion capabilities - findings applicable to improving antivirus threat definitions and EDR evasion research.
+        </p>
+        <div class="project-tools">
+          <span class="tool-pill">IDA Pro</span>
+          <span class="tool-pill">OllyDbg</span>
+          <span class="tool-pill">Ghidra</span>
+          <span class="tool-pill">Static Analysis</span>
+          <span class="tool-pill">Dynamic Analysis</span>
+          <span class="tool-pill">x86 Assembly</span>
+        </div>
+      </div>
+      <div></div>
+    </div>
+
+    <div class="project-card featured">
+      <div>
+        <p class="project-num">02 / DIGITAL FORENSICS</p>
+        <h3 class="project-title">Cybercrime Investigation - Simulated Case</h3>
+        <p class="project-desc">
+          Led a full forensic investigation of a simulated suspect scenario. Recovered evidence from steganography-concealed messages, obfuscated files, suspicious browser history, and network packet traces using Autopsy. Exploited vulnerabilities in suspect-controlled websites to extract additional evidence. Produced a complete chain-of-custody report documenting findings and establishing proof of illegal activity.
+        </p>
+        <div class="project-tools">
+          <span class="tool-pill">Autopsy</span>
+          <span class="tool-pill">Ghidra</span>
+          <span class="tool-pill">John the Ripper</span>
+          <span class="tool-pill">steghide</span>
+          <span class="tool-pill">Wireshark</span>
+          <span class="tool-pill">Docker</span>
+          <span class="tool-pill">VirtualBox</span>
+        </div>
+      </div>
+      <a href="resources/Forensics Project Report.pdf" class="project-link" target="_blank">
+        View Report ↗
+      </a>
+    </div>
+
+    <div class="project-card">
+      <div>
+        <p class="project-num">03 / MALWARE HISTORY</p>
+        <h3 class="project-title">Multi-Sample Malware Analysis Suite</h3>
+        <p class="project-desc">
+          Analyzed a series of malware samples spanning MS-DOS to 32-bit Windows: Michelangelo (boot sector virus), Dos7, SQLSlammer (network worm), Lucius, and Harulf. Used static and dynamic methods to compare infection techniques, payload delivery, and evasion strategies across generations of malware.
+        </p>
+        <div class="project-tools">
+          <span class="tool-pill">IDA Pro</span>
+          <span class="tool-pill">OllyDbg</span>
+          <span class="tool-pill">Static Analysis</span>
+          <span class="tool-pill">Windows PE</span>
+          <span class="tool-pill">MS-DOS</span>
+        </div>
+      </div>
+      <div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Experience -->
+<section id="experience">
+  <p class="section-label">Experience</p>
+  <h2>Where I've worked</h2>
+
+  <div class="experience-item">
+    <div class="exp-date">Summer 2023<br>New York, NY</div>
+    <div>
+      <p class="exp-company">GOOGLE</p>
+      <p class="exp-role">STEP Intern - Software Engineering</p>
+      <ul class="exp-bullets">
+        <li>Extended the back-end and front-end of an advertiser campaign insights feature, surfacing ad performance trend data to millions of Google Ads users.</li>
+        <li>Authored design documents and completed design reviews, implementing secure coding practices and participating in threat modeling discussions aligned with Google's internal security standards.</li>
+        <li>Wrote 10+ unit and end-to-end tests; contributed Java and Dart classes across back-end data processing and front-end rendering.</li>
+        <li>Collaborated with one fellow intern to scope and deliver the feature end-to-end using Java, Dart, CSS, and Mockito.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="experience-item">
+    <div class="exp-date">Sep 2025 – Present<br>Remote</div>
+    <div>
+      <p class="exp-company">TRYHACKME</p>
+      <p class="exp-role">Self-Directed Security Training</p>
+      <ul class="exp-bullets">
+        <li>Ranked in the top 25% of platform users; actively progressing through Jr. Penetration Tester and Security Engineer learning paths.</li>
+        <li>Practicing ethical penetration testing using Nmap, Hydra, Gobuster, and Metasploit to discover and exploit vulnerabilities in controlled environments.</li>
+        <li>Building hands-on skills across offensive and defensive domains through labs simulating real-world attack and incident response scenarios.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Writeups -->
+<section id="writeups">
+  <p class="section-label">Writeups</p>
+  <h2>TryHackMe &amp; CTF writeups</h2>
+  <p style="color:var(--muted); margin-bottom:2.5rem; max-width:560px; font-size:0.92rem;">
+    Documented solutions and methodology notes from rooms I've completed. Each writeup covers my approach, tools used, and key takeaways.
+  </p>
+
+  <div class="writeups-grid">
+
+    <!-- TEMPLATE: copy this block for each new writeup and fill in the details -->
+    <!--
+    <a href="writeups/room-name.html" class="writeup-card">
+      <div class="writeup-meta">
+        <span class="writeup-difficulty diff-easy">Easy</span>
+        <span class="writeup-date">Jun 2026</span>
+      </div>
+      <p class="writeup-title">Room Name Here</p>
+      <p class="writeup-summary">Brief description of what the room covered and what you learned or found interesting about it.</p>
+      <div class="writeup-tags">
+        <span class="writeup-tag">nmap</span>
+        <span class="writeup-tag">privilege escalation</span>
+        <span class="writeup-tag">linux</span>
+      </div>
+      <p class="writeup-cta">Read writeup →</p>
+    </a>
+    -->
+
+    <div class="writeup-coming-soon">
+      <p style="font-family:var(--font-mono); font-size:12px; color:var(--accent); margin-bottom:0.5rem; letter-spacing:0.1em;">// COMING SOON</p>
+      <p style="color:var(--muted); font-size:0.9rem;">Writeups in progress - check back soon.</p>
+      <p style="color:var(--muted); font-size:0.85rem; margin-top:0.5rem; font-family:var(--font-mono);">
+        TryHackMe: <a href="https://tryhackme.com/p/carsonhedrich" target="_blank" style="color:var(--accent);">tryhackme.com/p/carsonhedrich</a>
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <p class="section-label">Contact</p>
+  <h2>Let's connect</h2>
+  <p style="color:var(--muted); margin-bottom:2.5rem; max-width:480px;">
+    I'm actively seeking full-time roles in malware analysis, penetration testing, or detection engineering. Feel free to reach out.
+  </p>
+  <div class="contact-grid">
+    <a href="mailto:carsonhedrich@gmail.com" class="contact-link">
+      <div class="contact-icon">✉️</div>
+      <div>
+        <p class="contact-label">Email</p>
+        <p class="contact-value">carsonhedrich@gmail.com</p>
+      </div>
+    </a>
+    <a href="https://linkedin.com/in/carsonhedrich" class="contact-link" target="_blank">
+      <div class="contact-icon">💼</div>
+      <div>
+        <p class="contact-label">LinkedIn</p>
+        <p class="contact-value">linkedin.com/in/carsonhedrich</p>
+      </div>
+    </a>
+    <a href="https://github.com/carsonhedrich" class="contact-link" target="_blank">
+      <div class="contact-icon">🐙</div>
+      <div>
+        <p class="contact-label">GitHub</p>
+        <p class="contact-value">github.com/carsonhedrich</p>
+      </div>
+    </a>
+    <a href="resources/CarsonHedrich_Resume.pdf" class="contact-link" target="_blank">
+      <div class="contact-icon">📄</div>
+      <div>
+        <p class="contact-label">Resume</p>
+        <p class="contact-value">Download PDF ↗</p>
+      </div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Carson Hedrich</p>
+  <p>carsonhedrich.github.io</p>
+</footer>
+
+</body>
 </html>
